@@ -1,0 +1,30 @@
+body {
+	padding-top: 70px;
+	background-color: #f0f0f0;
+}
+
+.navbar-blue{
+	background-color: #375A7F;
+}
+.navbar-brand{
+	color: white !important;
+}
+
+.navbar-default .navbar-nav>li>a{
+	color: white !important;
+	border-bottom: solid transparent;
+}
+.navbar-default .navbar-nav>li>a:hover{
+	border-bottom: solid;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+	background-color: #2D4967;
+	border-bottom: solid;
+}
+.navbar-default .navbar-nav>li> .active{
+	background-color: #2D4967;
+}
+.navbar-default .navbar-nav>li> .active:hover{
+	background-color: #2D4967;
+}

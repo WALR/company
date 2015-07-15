@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | Invetario | Producto Editar{% endblock title %}
+
+{% block content %}
+	{% include "navbar.html" %}
+    <div class="container">
+
+        <div class="page-header">
+						<h4 class="text-center">
+							<a href="{% url 'inventario_app:inventario' %}" class="btn btn-success pull-left">
+									<span class="glyphicon glyphicon-chevron-left"></span> Regresar
+							</a>
+              Editando:<br><strong> {{ producto.nombre }}</strong>
+            </h4>
+        </div><!-- page-header -->
+
+        <div class="row">
+					<div class="col-md-12 well">
+							<form role="form" method="POST" enctype="multipart/form-data">
+								{% csrf_token %}
+										<strong>
+											<p class="text-center lead">
+												<span class="glyphicon glyphicon-info-sign"></span> Datos a Modificar
+											</p>
+										</strong>
+									{% if form.errors %}
+											<div class="alert alert-danger" role="alert">
+													{{ form.errors }}
+											</div>
+									{% endif %}
+									<div class="col-md-6 form-group">
+											<label class="label-control">{{ form.barcode.label_tag }}</label>
+											{{ form.barcode }}
+									</div>
+
+									<div class="col-md-6">
+										<div class="col-md-7 form-group">
+											<label class="label-control">{{ form.imagen.label_tag }}</label>
+											{{ form.imagen }}
+										</div>
+										<div class="col-md-5" style="margin-top:-4em;">
+											{% if producto.imagen %}
+													<img src="{{producto.imagen.url}}" alt="{{producto.nombre}}" class="img-thumbnail" width="200" style="height:120px !important;">
+											{% else %}
+													<img src="/media/default.png" alt="{{producto.nombre}}" class="img-thumbnail" width="200" style="height:120px !important;">
+											{% endif %}
+										</div>
+									</div>
+									<div class="col-md-12 form-group">
+											<label class="label-control">{{ form.nombre.label_tag }}</label>
+											{{ form.nombre }}
+									</div>
+									<div class="col-md-12 form-group">
+											<label class="label-control">{{ form.descripcion.label_tag }}</label>
+											{{ form.descripcion }}
+									</div>
+									<div class="col-md-6 form-group">
+											<label class="label-control">{{ form.marca.label_tag }}</label>
+											{{ form.marca }}
+									</div>
+									<div class="col-md-6 form-group">
+											<label class="label-control">{{ form.categoria.label_tag }}</label>
+											{{ form.categoria }}
+									</div>
+									<div class="col-md-6 form-group">
+											<label class="label-control">{{ form.existencia.label_tag }}</label>
+											{{ form.existencia }}
+									</div>
+									<div class="col-md-6 form-group">
+											<label class="label-control">{{ form.precioVenta.label_tag }}</label>
+											{{ form.precioVenta }}
+									</div>
+									<div class="col-md-6 form-group">
+											<label class="label-control">{{ form.precioPorMayor.label_tag }}</label>
+											{{ form.precioPorMayor }}
+									</div>
+									<div class="col-md-6 form-group">
+											<label class="label-control">{{ form.precioCompra.label_tag }}</label>
+											{{ form.precioCompra }}
+									</div>
+									<div class="col-md-6 form-group">
+											<label class="label-control">{{ form.sucursal.label_tag }}</label>
+											{{ form.sucursal }}
+									</div>
+									<div class="col-md-6 form-group">
+											<label class="label-control">{{ form.proveedor.label_tag }}</label>
+											{{ form.proveedor }}
+									</div>
+
+									<div class="col-md-12 col-md-offset-5 form-group">
+											<button type="submit" class="btn btn-lg btn-primary">Editar Producto</button>
+									</div>
+								</form>
+						</div><!-- col-md-12 -->
+
+        </div><!-- /row -->
+
+    </div>
+{% endblock content %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | Perfil de Usuario{% endblock title %}
+
+{% block content %}
+	{% include "navbar.html" %}
+    <div class="container">
+
+        <div class="page-header">
+            <h4>
+                <a href="{% url 'inventario_app:inventario' %}" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                </a>
+                <strong>Editando: {{ producto.nombre }}</strong>
+            </h4>
+        </div><!-- page-header -->
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <form role="form" action="{% url 'inventario_app:editar_producto' producto.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <p class="lead"><span class="glyphicon glyphicon-info-sign"></span>Datos a Modificar</p>
+
+                    {% if form.error %}
+	                    <div class="alert alert-danger" role="alert">
+	                        {{ form.error }}
+	                    </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label class="label-control">{{ form.barcode.label_tag }}</label>
+                        {{ form.barcode }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.nombre.label_tag }}</label>
+                        {{ form.nombre }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.descripcion.label_tag }}</label>
+                        {{ form.descripcion }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.marca.label_tag }}</label>
+                        {{ form.marca }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.existencia.label_tag }}</label>
+                        {{ form.existencia }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.precioVenta.label_tag }}</label>
+                        {{ form.precioVenta }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.precioCompra.label_tag }}</label>
+                        {{ form.precioCompra }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.precioPorMayor.label_tag }}</label>
+                        {{ form.precioPorMayor }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.imagen.label_tag }}</label>
+                        {{ form.imagen }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.sucursal.label_tag }}</label>
+                        {{ form.sucursal }}
+                    </div><div class="form-group">
+                        <label class="label-control">{{ form.proveedor.label_tag }}</label>
+                        {{ form.proveedor }}
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">{{ form.categoria.label_tag }}</label>
+                        {{ form.categoria }}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                    </div>
+                </form>
+
+            </div><!-- col-md-12 -->
+
+        </div><!-- /row -->
+
+    </div>
+{% endblock content %}

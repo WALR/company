@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | Invetario | Producto Eliminar{% endblock title %}
+
+{% block content %}
+	{% include "navbar.html" %}
+    <div class="container">
+
+        <div class="page-header">
+            <h4>
+                <strong>Eliminar: {{ producto.nombre }}</strong>
+            </h4>
+        </div>
+
+        <div class="row">
+            
+            <div class="col-md-12">
+
+                <form role="form" action="{% url 'inventario_app:eliminar_producto' producto.id %}" method="POST">{% csrf_token %}
+                    <p class="">¿Desea eliminar el producto "{{ producto.nombre }}"?</p>
+
+                    <input type="submit" value="Sí" class="btn btn-danger"> 
+                    <a href="{% url 'inventario_app:inventario' %}" class="btn btn-default">No</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    
+{% endblock content %}

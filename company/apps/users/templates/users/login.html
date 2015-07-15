@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | Registrarse/Login {% endblock title %}
+
+
+
+{% block content %}
+    <div class="navbar navbar-default navbar-blue navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">Company</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" >
+                            <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'inventario_app:inventario' %}" class="">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            Inventario
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                            Ventas
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Simplex <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="download">
+                            <li><a href="http://jsfiddle.net/bootswatch/3he50zsf/">Open Sandbox</a></li>
+                            <li class="divider"></li>
+                            <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
+                            <li><a href="./bootstrap.css">bootstrap.css</a></li>
+                            <li class="divider"></li>
+                            <li><a href="./variables.less">variables.less</a></li>
+                            <li><a href="./bootswatch.less">bootswatch.less</a></li>
+                            <li class="divider"></li>
+                            <li><a href="./_variables.scss">_variables.scss</a></li>
+                            <li><a href="./_bootswatch.scss">_bootswatch.scss</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">
+                                <span class="pull-left glyphicon glyphicon-user" aria-hidden="true" style="font-size:18px;padding-right:0.5em;"></span>
+                                {{ user.username|upper}}
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="download">
+                                <li>
+                                    <a href="#">
+                                        Dashboard
+                                        <span class="pull-right glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'inventario_app:inventario' %}">
+                                        Inventario
+                                        <span class="pull-right glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Ventas
+                                        <span class="pull-right glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        Usuarios
+                                        <span class="pull-right glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Configuraciones
+                                        <span class="pull-right glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{% url 'user_app:logout' %}">
+                                        Salir
+                                        <span class="pull-right glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a class="active" href="{% url 'user_app:login' %}">Registrarse / Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <h1 class="text-center">Registrarse / Login</h1>
+                <p>&nbsp;</p>
+
+            </div><!-- col-md-12 -->
+
+        </div><!-- /row -->
+
+        <div class="row">
+
+            <div class=" col-md-12 text-center">
+
+                <div class="col-md-push-3 col-md-3 text-center line">
+                    <p>
+                        <a href="#" class="btn btn-primary btn-lg btn-block">Regitrate con Facebook</a>
+                        <a href="#" class="btn btn-danger btn-lg btn-block">Regitrate con Google+</a>
+                    </p>
+
+                    <hr>
+
+                    <form role="form" method="POST">{% csrf_token %}
+                        <p class="text-center">Registrate y empieza a crear:</p>
+                        <div class="form-group">
+                            {{ user_register.username }}
+                            {{ user_register.username.erros }}
+                        </div>
+                        <div class="form-group">
+                            {{ user_register.email }}
+                            {{ user_register.email.erros }}
+                        </div>
+                        <div class="form-group">
+                            {{ user_register.password }}
+                            {{ user_register.password.erros }}
+                        </div>
+                        <button type="submit" name="register_form" class="btn btn-success btn-lg btn-block">Registrar</button>
+                    </form>
+                </div><!-- col-md-6 -->
+
+                <div class="col-md-push-3 col-md-3 text-left">
+                    <form role="form" method="POST">{% csrf_token %}
+                        <p class="text-center">Ingresa tus credenciales y accede al sistema web hecho en Django:</p>
+                        <div class="form-group">
+                            {{ login_form.username }}
+                            {{ login_form.username.errors }}
+                        </div>
+                        <div class="form-group">
+                            {{ login_form.password }}
+                            {{ login_form.password.errors }}
+                        </div>
+                        <button type="submit" name="login_form" class="btn btn-success btn-lg btn-block">Log in</button>
+                    </form>
+                </div><!-- col-md-6 -->
+
+            </div><!-- col-md-12 -->
+
+        </div><!-- /row -->
+
+    </div>
+
+{% endblock content %}

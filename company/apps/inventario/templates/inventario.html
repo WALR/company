@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | Invetario{% endblock title %}
+
+
+
+{% block content %}
+	{% include "navbar.html" %}
+		{% if permiso %}
+		<div class="text-center alert alert-danger" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Usted no tiene permisos para realizar esa accion!</strong>
+		</div>
+		{% endif %}
+ 	<div class="page-header">
+        <h4>
+            <strong>
+                Tienes <span class="label label-primary">{{ producto|length }}</span> Productos disponibles
+            </strong>
+            <a class="btn btn-primary pull-right" href="{% url 'inventario_app:crear_producto' %}">
+                <span class="glyphicon glyphicon-plus"></span> Crear un Producto
+            </a>
+        </h4>
+    </div>
+
+	<div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+            <thead>
+	            <tr>
+	                <th class="text-center" colspan="2">Nombre del Producto</th>
+	                <th class="text-center">Marca</th>
+	                <th class="text-center">Categoria</th>
+	                <th class="text-center">Existencia</th>
+	                <th class="text-center">Sucursal</th>
+	                <th class="text-center">Precio Venta</th>
+	                <th class="text-center">Acciones</th>
+	            </tr>
+            </thead>
+            <tbody>
+				{% for prod in producto %}
+                <tr>
+                    <td>
+                    	{% if prod.imagen %}
+                        	<img src="{{ prod.imagen.url }}" alt="{{ prod.nombre }}" width="60" class="img-rounded">
+                      {% else %}
+                    		<img src="/media/default.png" alt="{{ prod.nombre }}" width="60" class="img-rounded">
+                    	{% endif %}
+                    </td>
+                    <td>{{ prod.nombre }}</td>
+                    <td class="text-center">{{ prod.marca }}</td>
+                    <td class="text-center">{{ prod.categoria }}</td>
+                    <td class="text-center">{{ prod.existencia }}</td>
+                    <td class="text-center">{{ prod.sucursal }}</td>
+                    <td class="text-center">Q.{{ prod.precioVenta|floatformat:2 }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'inventario_app:detalle_producto' prod.id %}" class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>
+                        <a href="{% url 'inventario_app:editar_producto' prod.id %}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="{% url 'inventario_app:eliminar_producto' prod.slug %}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+				{% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

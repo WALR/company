@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | Invetario | Producto Detalle{% endblock title %}
+
+{% block content %}
+    {% include "navbar.html" %}
+    <div class="container">
+
+        <div class="page-header">
+            <h4>
+                <a href="{% url 'inventario_app:inventario' %}" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                </a>
+                <div class="text-center">
+                    Producto:<strong> {{ producto.nombre }}</strong>
+                </div>
+            </h4>
+        </div>
+
+        <div class="row">
+            
+            <div class="col-md-3 text-center">
+                {% if producto.imagen %}
+                    <img src="{{producto.imagen.url}}" alt="{{producto.nombre}}" class="img-rounded" alt="" width="250">
+                {% else %}
+                    <img src="/media/default.png" alt="{{producto.nombre}}" class="img-rounded" alt="" width="250">
+                {% endif %}
+            </div>
+
+            <div class="col-md-9">
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Barcode</th>
+                            {% if producto.barcode %}
+                                <td>{{producto.barcode}}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>{{producto.nombre}}</td>
+                        </tr>
+                        <tr>
+                            <th>Descripcion</th>
+                            <td>{{producto.descripcion}}</td>
+                        </tr>
+                        <tr>
+                            <th>Marca</th>
+                            <td>{{producto.marca}}</td>
+                        </tr>
+                        <tr>
+                            <th>Existencia</th>
+                            <td>{{producto.existencia}}</td>
+                        </tr>
+                        <tr>
+                            <th>Precio Venta</th>
+                            <td>{{producto.precioVenta}}</td>
+                        </tr>
+                        <tr>
+                            <th>Precio Compra</th>
+                            <td>{{producto.precioCompra}}</td>
+                        </tr>
+                        <tr>
+                            <th>Precio por Mayor</th>
+                            <td>{{producto.precioPorMayor}}</td>
+                        </tr>
+                        <tr>
+                            <th>Sucursal</th>
+                            <td>{{producto.sucursal}}</td>
+                        </tr>
+                        <tr>
+                            <th>Proveedor</th>
+                            <td>{{producto.proveedor}}</td>
+                        </tr>
+                        <tr>
+                            <th>Categoria</th>
+                            <td>{{producto.categoria}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock content %}
